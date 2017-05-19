@@ -275,13 +275,13 @@ void BaseConvolutionLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 
 template <typename Dtype> 
 void BaseConvolutionLayer<Dtype>::forward_cpu_gemm(const Dtype* input, const Dtype* weights, Dtype* output, bool skip_im2col) {
-  const Dtype* col_buff = input;
+  const Dtype* col_buff; // = input;
   // performing partial lowered convolution
   if(partial_conv_lower_) {
-    int channel_input_offset = bottom_dim_ / conv_in_channels_;
+    int input_channel_offset = bottom_dim_ / conv_in_channels_;
     int weights_per_col = kernel_dim_ / conv_in_channels_;
     int channel_weights_offset = conv_out_channels_ * weights_per_col;
-
+    Dtype gemm_beta = 0.;
     Dtype* channel_weights (new Dtype[channel_weights_offset]);
     Dtype* wrong_output (new Dtype[top_dim_]);
     Dtype* output_diff (new Dtype[top_dim_]);
@@ -294,10 +294,12 @@ void BaseConvolutionLayer<Dtype>::forward_cpu_gemm(const Dtype* input, const Dty
     // the weights channel matrix will iterate through 0 - 
     int input_channels = conv_in_channels_;
     if(input_channels == 20) {
-      std::cout << "second conv" << std::endl;
+      //std::cout << "second conv" << std::endl;
     }
     for (int channel_num = 0; channel_num < input_channels; ++channel_num) {
-
+      if(channel_num != 0) {
+        gemm_beta = 1.;
+      }
       int index = 0;
       int channel_weights_index;
       for (int row = 0; row < conv_out_channels_; ++row) {
@@ -310,31 +312,26 @@ void BaseConvolutionLayer<Dtype>::forward_cpu_gemm(const Dtype* input, const Dty
       
       if (!is_1x1_) {
         if (!skip_im2col) {
-          //conv_in_channels_ = 1; + channel_input_offset * channel_num
-          conv_im2col_cpu(input, col_buffer_.mutable_cpu_data());
-          //conv_in_channels_ = input_channels;
+          conv_in_channels_ = 1;
+          conv_im2col_cpu(input + channel_num * input_channel_offset , col_buffer_.mutable_cpu_data());
+          conv_in_channels_ = input_channels;
         }
         col_buff = col_buffer_.cpu_data();
       } 
       else {
-        //col_buff += channel_input_offset * channel_num;
-      }
-      
-         // A: m rows by k columns
-         // B: k rows by n columns
-         // C: m rows by n columns
-         // C = alpha * A * B + beta * C 
-        caffe_cpu_gemm<Dtype>(CblasNoTrans,                          // CBLAS_TRANSPOSE TransA
-                              CblasNoTrans,                          // CBLAS_TRANSPOSE TransB
-                              conv_out_channels_,                    // M  (# A and C rows)
-                              conv_out_spatial_dim_,                 // N  (# B and C columns)
-                              kernel_dim_ / conv_in_channels_,       // K  (# A columns, # B rows)       
-                              (Dtype)1.,                             // alpha
-                              channel_weights,                       // A
-                              col_buff + channel_num * weights_per_col * conv_out_spatial_dim_, // B
-                              (Dtype)1.,                             // beta
-                              wrong_output);                         // C
-    
+        col_buff = input + channel_num * input_channel_offset;
+      } 
+
+      caffe_cpu_gemm<Dtype>(CblasNoTrans,                      // CBLAS_TRANSPOSE TransA
+                            CblasNoTrans,                      // CBLAS_TRANSPOSE TransB
+                            conv_out_channels_,                // M  (# A and C rows)
+                            conv_out_spatial_dim_,             // N  (# B and C columns)
+                            kernel_dim_ / conv_in_channels_,   // K  (# A columns, # B rows)       
+                            (Dtype)1.,                         // alpha
+                            channel_weights,                   // A
+                            col_buff,                          // B   + channel_num * weights_per_col * conv_out_spatial_dim_
+                            gemm_beta,                         // beta
+                            output);                           // C
     }
     const Dtype* correct_buff = input;
     if (!is_1x1_) {
@@ -343,6 +340,10 @@ void BaseConvolutionLayer<Dtype>::forward_cpu_gemm(const Dtype* input, const Dty
       }
       correct_buff = col_buffer_.cpu_data();
     }
+    // A: m rows by k columns
+    // B: k rows by n columns
+    // C: m rows by n columns
+    // C = alpha * A * B + beta * C
     caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans, 
                           conv_out_channels_, 
                           conv_out_spatial_dim_, 
@@ -351,10 +352,12 @@ void BaseConvolutionLayer<Dtype>::forward_cpu_gemm(const Dtype* input, const Dty
                           weights, 
                           correct_buff,
                           (Dtype)0.,
-                          output);
+                          wrong_output);
 
+    double total_diff = 0.0;
     for(int i  = 0; i < top_dim_; ++i) {
       output_diff[i] = wrong_output[i] - output[i];
+      output_diff[i] > 0 ? total_diff += output_diff[i] : total_diff -= output_diff[i];
     }
 
     delete[] channel_weights;
