@@ -1,0 +1,19 @@
+
+I0518 09:33:30.015408  8520 net.cpp:200] mnist-dev does not need backward computation.
+I0518 09:33:30.015408  8520 net.cpp:242] This network produces output accuracy
+I0518 09:33:30.015408  8520 net.cpp:242] This network produces output loss
+I0518 09:33:30.015408  8520 net.cpp:255] Network initialization done.
+I0518 09:33:30.017408  8520 caffe.cpp:291] Running for 5 iterations.
+I0518 09:33:30.150423  8520 caffe.cpp:314] Batch 0, accuracy = 1
+I0518 09:33:30.151422  8520 caffe.cpp:314] Batch 0, loss = 0.0247265
+I0518 09:33:30.183425  8520 caffe.cpp:314] Batch 1, accuracy = 1
+I0518 09:33:30.183425  8520 caffe.cpp:314] Batch 1, loss = 0.0322306
+I0518 09:33:30.216428  8520 caffe.cpp:314] Batch 2, accuracy = 0.96
+I0518 09:33:30.216428  8520 caffe.cpp:314] Batch 2, loss = 0.0848104
+I0518 09:33:30.249433  8520 caffe.cpp:314] Batch 3, accuracy = 0.98
+I0518 09:33:30.249433  8520 caffe.cpp:314] Batch 3, loss = 0.0667757
+I0518 09:33:30.282435  8520 caffe.cpp:314] Batch 4, accuracy = 0.96
+I0518 09:33:30.282435  8520 caffe.cpp:314] Batch 4, loss = 0.114459
+I0518 09:33:30.282435  8520 caffe.cpp:319] Loss: 0.0646005
+I0518 09:33:30.282435  8520 caffe.cpp:331] accuracy = 0.98
+I0518 09:33:30.282435  8520 caffe.cpp:331] loss = 0.0646005 (* 1 = 0.0646005 loss)

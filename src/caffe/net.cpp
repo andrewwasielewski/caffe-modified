@@ -5,6 +5,8 @@
 #include <utility>
 #include <vector>
 
+#include <iostream>
+
 #include "hdf5.h"
 
 #include "caffe/common.hpp"
