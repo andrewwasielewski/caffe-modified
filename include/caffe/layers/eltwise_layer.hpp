@@ -29,6 +29,10 @@ class EltwiseLayer : public Layer<Dtype> {
   virtual inline int MinBottomBlobs() const { return 2; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    max_idx_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

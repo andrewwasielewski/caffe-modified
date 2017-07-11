@@ -55,6 +55,7 @@ layer {
     bias_filler {
       type: "constant"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -91,6 +92,7 @@ layer {
     bias_filler {
       type: "constant"
     }
+    engine: CAFFE
   }
 }
 layer {

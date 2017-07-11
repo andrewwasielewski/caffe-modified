@@ -26,6 +26,10 @@ class SoftmaxLayer : public Layer<Dtype> {
   virtual inline int ExactNumBottomBlobs() const { return 1; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    sum_multiplier_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

@@ -1,0 +1,77 @@
+cmake_minimum_required(VERSION 2.6)
+cmake_policy(SET CMP0012 OLD)
+
+project(CaffeAPI)
+
+if(ON)
+  if(NOT OpenCV_FOUND)
+    set(Caffe_OpenCV_CONFIG_PATH "C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/x64/vc14/lib")
+    if(Caffe_OpenCV_CONFIG_PATH)
+      get_filename_component(Caffe_OpenCV_CONFIG_PATH ${Caffe_OpenCV_CONFIG_PATH} ABSOLUTE)
+
+      if(EXISTS ${Caffe_OpenCV_CONFIG_PATH} AND NOT TARGET opencv_core)
+        message(STATUS "Caffe: using OpenCV config from ${Caffe_OpenCV_CONFIG_PATH}")
+        include(${Caffe_OpenCV_CONFIG_PATH}/OpenCVModules.cmake)
+      endif()
+
+    else()
+      find_package(OpenCV REQUIRED)
+    endif()
+    unset(Caffe_OpenCV_CONFIG_PATH)
+  endif()
+endif()
+
+# Compute paths
+get_filename_component(Caffe_CMAKE_DIR "C:/Users/z003ncra/caffe-dev/build/cmake" PATH)
+set(Caffe_INCLUDE_DIRS "C:/Users/z003ncra/caffe-dev/include")
+list(APPEND Caffe_INCLUDE_DIRS "C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/x64/vc14/lib")
+list(APPEND Caffe_INCLUDE_DIRS "C:/Users/z003ncra/caffe-dev/build/src")
+
+# Our library dependencies
+#if(NOT TARGET caffe AND NOT caffe_BINARY_DIR)
+include("C:/Users/z003ncra/caffe-dev/build/CaffeTargets.cmake")
+#endif()
+
+# List of IMPORTED libs created by CaffeTargets.cmake
+set(Caffe_LIBRARIES "C:/Users/z003ncra/caffe-dev/build/lib/caffe.lib")
+
+# Definitions
+set(Caffe_DEFINITIONS "-DUSE_OPENCV;-DUSE_LMDB;-DUSE_LEVELDB")
+
+# Cuda support variables
+set(Caffe_CPU_ONLY ON)
+set(Caffe_HAVE_CUDA FALSE)
+set(Caffe_HAVE_CUDNN FALSE)
+
+SET(DEPENDENCIES_ROOT_PATH "C:/Users/z003ncra/caffe-dev/build")
+SET(CAFFE_INSTALL_DIR ${DEPENDENCIES_ROOT_PATH}/install)
+include_directories(${CUDA_INSTALL_PATH} ${CMAKE_SOURCE_DIR} ${CAFFE_INSTALL_DIR}/include C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include/boost-1_61)
+link_directories(${CAFFE_INSTALL_DIR}/lib C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include C:/Users/z003ncra/caffe-dev/build/lib)
+
+add_definitions(-DBOOST_ALL_DYN_LINK)
+SET(PROJECT_BINARY_DIR "C:/Users/z003ncra/caffe-dev/python/caffe")
+include_directories( ${PROJECT_BINARY_DIR} ${Caffe_INCLUDE_DIRS})
+
+# adding sources to target
+#add_executable(CaffeAPI CaffeAPI.cpp api_test.cpp)
+#target_link_libraries(CaffeAPI ${OpenCV_LIBS} ${Caffe_LIBRARIES} -lglog -lprotobuf -lboost_system)
+
+include_directories(${CAFFE_INSTALL_DIR}/include)
+link_directories(${CAFFE_INSTALL_DIR}/lib)
+# Collect source files
+#SET(CMAKE_CURRENT_SOURCE_DIR "C:/Users/z003ncra/caffe-dev/src/caffe")
+#file(GLOB_RECURSE srcs ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+#SET(PROJECT_SOURCE_DIR "C:/Users/z003ncra/caffe-dev/src/caffe")
+#FILE(GLOB_RECURSE caffeapi_src ${PROJECT_SOURCE_DIR}/api/*.cpp)
+
+# Build each source file independently
+#foreach(source ${srcs})
+#get_filename_component(name ${source} NAME_WE)
+  
+# target
+add_executable(CaffeAPI api_test.cpp)
+target_link_libraries(CaffeAPI proto glog caffe)
+
+# Install
+install(TARGETS CaffeAPI DESTINATION C:/Users/z003ncra/caffe-dev/src/caffe/api/bin)
+#endforeach(source)

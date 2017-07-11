@@ -60,6 +60,17 @@ class BatchNormLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    mean_.ReleaseMemory();
+    variance_.ReleaseMemory();
+    temp_.ReleaseMemory();
+    x_norm_.ReleaseMemory();
+    batch_sum_multiplier_.ReleaseMemory();
+    num_by_chans_.ReleaseMemory();
+    spatial_sum_multiplier_.ReleaseMemory();
+  }
+
   Blob<Dtype> mean_, variance_, temp_, x_norm_;
   bool use_global_stats_;
   Dtype moving_average_fraction_;

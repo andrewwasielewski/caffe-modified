@@ -28,9 +28,22 @@ class BaseConvolutionLayer : public Layer<Dtype> {
   virtual inline int MinTopBlobs() const { return 1; }
   virtual inline bool EqualNumBottomTopBlobs() const { return true; }
 
- protected:
-  void get_col_from_row_major_matrix(const Dtype* matrix, Dtype* col_result, int len_row, int num_rows, int len_col, int col_number);
+  virtual void ReleaseTemporaryBuffers() {
+    col_buffer_.ReleaseMemory();
+  }
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    col_buffer_.ReleaseMemory();
+    bias_multiplier_.ReleaseMemory();
+    kernel_shape_.ReleaseMemory();
+    stride_.ReleaseMemory();
+    pad_.ReleaseMemory();
+    dilation_.ReleaseMemory();
+    conv_input_shape_.ReleaseMemory();
+  }
+
+ protected:
   // Helper functions that abstract away the column buffer and gemm arguments.
   // The last argument in forward_cpu_gemm is so that we can skip the im2col if
   // we just called weight_cpu_gemm with the same input.
@@ -60,13 +73,28 @@ class BaseConvolutionLayer : public Layer<Dtype> {
 
 
 #ifndef CPU_ONLY
-  void forward_gpu_gemm(const Dtype* col_input, const Dtype* weights,
-      Dtype* output, bool skip_im2col = false);
+  void partial_forward_gpu_gemm(const Dtype* input, const Dtype* weights, Dtype* output);
+  void full_forward_gpu_gemm(const Dtype* input, const Dtype* weights, Dtype* output, bool skip_im2col);
+  inline void forward_gpu_gemm(const Dtype* input, const Dtype* weights, Dtype* output, bool skip_im2col = false) {
+    if(partial_conv_lower_) partial_forward_gpu_gemm(input, weights, output);
+    else full_forward_gpu_gemm(input, weights, output, skip_im2col);
+  }
+  
+  void partial_backward_gpu_gemm(const Dtype* output, const Dtype* weights, Dtype* input);
+  void full_backward_gpu_gemm(const Dtype* output, const Dtype* weights, Dtype* input);
+  inline void backward_gpu_gemm(const Dtype* output, const Dtype* weights, Dtype* input) {
+    if(partial_conv_lower_) partial_backward_gpu_gemm(output, weights, input);
+    else full_backward_gpu_gemm(output, weights, input);
+  }
+  
+  void partial_weight_gpu_gemm(const Dtype* input, const Dtype* output, Dtype* weights);
+  void full_weight_gpu_gemm(const Dtype* input, const Dtype* output, Dtype* weights);
+  inline void weight_gpu_gemm(const Dtype* input, const Dtype* output, Dtype* weights) {
+    if(partial_conv_lower_) partial_weight_gpu_gemm(input, output, weights);
+    else full_weight_gpu_gemm(input, output, weights);
+  }
+
   void forward_gpu_bias(Dtype* output, const Dtype* bias);
-  void backward_gpu_gemm(const Dtype* input, const Dtype* weights,
-      Dtype* col_output);
-  void weight_gpu_gemm(const Dtype* col_input, const Dtype* output, Dtype*
-      weights);
   void backward_gpu_bias(Dtype* bias, const Dtype* input);
 #endif
 
@@ -79,6 +107,8 @@ class BaseConvolutionLayer : public Layer<Dtype> {
   virtual bool reverse_dimensions() = 0;
   // Compute height_out_ and width_out_ from other parameters.
   virtual void compute_output_shape() = 0;
+
+  long get_buffer_size() { return col_buffer_.data()->size(); }
 
   /// @brief The spatial dimensions of a filter kernel.
   Blob<int> kernel_shape_;
@@ -174,6 +204,9 @@ class BaseConvolutionLayer : public Layer<Dtype> {
     }
   }
 #endif
+
+  void get_col_from_row_major_matrix(const Dtype* matrix, Dtype* col_result, int len_row, int num_rows, int len_col, int col_number);
+  void add_col_to_row_major_matrix(Dtype* matrix, Dtype* add_col, int len_row, int num_rows, int len_col, int col_number);
 
   int num_kernels_im2col_;
   int num_kernels_col2im_;

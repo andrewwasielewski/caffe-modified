@@ -1,0 +1,41 @@
+cmake_minimum_required(VERSION 2.6)
+project(apicaffe C CXX)
+
+set(Caffe_INCLUDE_DIRS "C:/Users/z003ncra/caffe-dev/include")
+list(APPEND Caffe_INCLUDE_DIRS "C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/x64/vc14/lib")
+list(APPEND Caffe_INCLUDE_DIRS "C:/Users/z003ncra/caffe-dev/build/src")
+
+include_directories("C:/Users/z003ncra/caffe-dev/build/include")
+link_directories("C:/Users/z003ncra/caffe-dev/build/lib")
+# Collect source files
+#file(GLOB_RECURSE srcs ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+#FILE(GLOB_RECURSE caffeapi_src ${PROJECT_SOURCE_DIR}/api/*.cpp)
+
+# Build each source file independently
+#foreach(source ${srcs})
+#get_filename_component(name ${source} NAME_WE)
+  
+SET(DEPENDENCIES_ROOT_PATH "C:/Users/z003ncra/caffe-dev/build")
+SET(CAFFE_INSTALL_DIR ${DEPENDENCIES_ROOT_PATH}/install)
+include_directories(${CUDA_INSTALL_PATH} ${CMAKE_SOURCE_DIR} ${CAFFE_INSTALL_DIR}/include C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include/boost-1_61)
+link_directories(${CAFFE_INSTALL_DIR}/lib C:/Users/z003ncra/.caffe/dependencies/libraries_v140_x64_py27_1.1.0/libraries/include C:/Users/z003ncra/caffe-dev/build/lib)
+
+add_definitions(-DBOOST_ALL_DYN_LINK)
+SET(PROJECT_BINARY_DIR "C:/Users/z003ncra/caffe-dev/python/caffe")
+include_directories( ${PROJECT_BINARY_DIR} ${Caffe_INCLUDE_DIRS})
+
+set(Caffe_LIBRARIES "C:/Users/z003ncra/caffe-dev/build/lib/caffe.lib")
+
+set(Caffe_CPU_ONLY 1)
+set(Caffe_HAVE_CUDA FALSE)
+set(Caffe_HAVE_CUDNN FALSE)
+
+# target
+MESSAGE( STATUS "adding " ${name})
+add_library(CaffeAPI CaffeAPI.cpp)
+add_executable(API_test api_test.cpp)
+target_link_libraries(API_test ${Caffe_LIBRARIES} proto glog caffe)
+
+  # Install
+install(TARGETS API_test DESTINATION "C:/Users/z003ncra/caffe-dev/src/caffe/api/bin")
+#endforeach(source)

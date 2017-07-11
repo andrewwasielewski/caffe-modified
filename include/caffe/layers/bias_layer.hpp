@@ -42,6 +42,11 @@ class BiasLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    bias_multiplier_.ReleaseMemory();
+  }
+
  private:
   Blob<Dtype> bias_multiplier_;
   int outer_dim_, bias_dim_, inner_dim_, dim_;

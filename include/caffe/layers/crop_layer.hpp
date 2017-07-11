@@ -31,6 +31,13 @@ class CropLayer : public Layer<Dtype> {
   virtual inline int ExactNumBottomBlobs() const { return 2; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    offsets.ReleaseMemory();
+    src_strides_.ReleaseMemory();
+    dest_strides_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

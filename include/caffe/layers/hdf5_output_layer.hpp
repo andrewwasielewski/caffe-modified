@@ -39,6 +39,11 @@ class HDF5OutputLayer : public Layer<Dtype> {
 
   inline std::string file_name() const { return file_name_; }
 
+  virtual void ReleaseAllBuffers() {
+    data_blob_.ReleaseMemory();
+    label_blob_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

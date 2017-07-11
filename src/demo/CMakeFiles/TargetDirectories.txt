@@ -1,0 +1,4 @@
+C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/HelloWorld.dir
+C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/INSTALL.dir
+C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/ALL_BUILD.dir
+C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/ZERO_CHECK.dir

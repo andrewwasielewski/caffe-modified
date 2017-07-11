@@ -14,6 +14,7 @@ namespace bp = boost::python;
 #include "boost/algorithm/string.hpp"
 #include "caffe/caffe.hpp"
 #include "caffe/util/signal_handler.h"
+#include <cuda_profiler_api.h>
 
 using caffe::Blob;
 using caffe::Caffe;
@@ -331,6 +332,7 @@ int test() {
     LOG(INFO) << output_name << " = " << mean_score << loss_msg_stream.str();
   }
 
+  // cudaProfilerStop();
   return 0;
 }
 RegisterBrewFunction(test);

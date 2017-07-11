@@ -1,0 +1,455 @@
+The system is: Windows - 6.1.7601 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:46:57 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdC\.\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.48
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/3.6.3/CompilerIdC/CompilerIdC.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:46:58 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdCXX\.\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\3.6.3\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.49
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/3.6.3/CompilerIdCXX/CompilerIdCXX.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_06cff.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:46:59 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_06cff.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_06cff.dir\Debug\".
+  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_06cff.dir\Debug\cmTC_06cff.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_06cff.dir\Debug\cmTC_06cff.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06cff.dir\Debug\\" /Fd"cmTC_06cff.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\testCCompiler.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06cff.dir\Debug\\" /Fd"cmTC_06cff.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\testCCompiler.c"
+  
+  testCCompiler.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_06cff.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_06cff.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_06cff.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_06cff.dir\Debug\testCCompiler.obj
+  cmTC_06cff.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_06cff.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_06cff.dir\Debug\cmTC_06cff.tlog\unsuccessfulbuild".
+  Touching "cmTC_06cff.dir\Debug\cmTC_06cff.tlog\cmTC_06cff.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_06cff.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.54
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5c1be.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:47:00 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_5c1be.dir\Debug\".
+  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c1be.dir\Debug\\" /Fd"cmTC_5c1be.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c1be.dir\Debug\\" /Fd"cmTC_5c1be.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  
+  CMakeCCompilerABI.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_5c1be.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_5c1be.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_5c1be.lib" /MACHINE:X86 /SAFESEH  /machine:X86 -Wl,--verbose cmTC_5c1be.dir\Debug\CMakeCCompilerABI.obj
+LINK : warning LNK4044: unrecognized option '/Wl,--verbose'; ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj]
+  cmTC_5c1be.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_5c1be.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\unsuccessfulbuild".
+  Touching "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\cmTC_5c1be.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" (default target) (1) ->
+(Link target) -> 
+  LINK : warning LNK4044: unrecognized option '/Wl,--verbose'; ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.53
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(link\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_5c1be.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"]
+  ignore line: [Microsoft (R) Build Engine version 14.0.25420.1]
+  ignore line: [Copyright (C) Microsoft Corporation. All rights reserved.]
+  ignore line: []
+  ignore line: [Build started 6/5/2017 1:47:00 PM.]
+  ignore line: [Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" on node 1 (default targets).]
+  ignore line: [PrepareForBuild:]
+  ignore line: [  Creating directory "cmTC_5c1be.dir\Debug\".]
+  ignore line: [  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".]
+  ignore line: [  Creating directory "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\".]
+  ignore line: [InitializeBuildStatus:]
+  ignore line: [  Creating "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.]
+  ignore line: [ClCompile:]
+  ignore line: [  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c1be.dir\Debug\\" /Fd"cmTC_5c1be.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCCompilerABI.c"]
+  ignore line: [  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86]
+  ignore line: [  Copyright (C) Microsoft Corporation.  All rights reserved.]
+  ignore line: [  ]
+  ignore line: [  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c1be.dir\Debug\\" /Fd"cmTC_5c1be.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCCompilerABI.c"]
+  ignore line: [  ]
+  ignore line: [  CMakeCCompilerABI.c]
+  ignore line: [Link:]
+  ignore line: [  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_5c1be.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_5c1be.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_5c1be.lib" /MACHINE:X86 /SAFESEH  /machine:X86 -Wl,--verbose cmTC_5c1be.dir\Debug\CMakeCCompilerABI.obj]
+  ignore line: [LINK : warning LNK4044: unrecognized option '/Wl,--verbose']
+  ignore line: [ ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj]]
+  ignore line: [  cmTC_5c1be.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_5c1be.exe]
+  ignore line: [FinalizeBuildStatus:]
+  ignore line: [  Deleting file "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\unsuccessfulbuild".]
+  ignore line: [  Touching "cmTC_5c1be.dir\Debug\cmTC_5c1be.tlog\cmTC_5c1be.lastbuildstate".]
+  ignore line: [Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" (default targets).]
+  ignore line: []
+  ignore line: [Build succeeded.]
+  ignore line: []
+  ignore line: ["C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj" (default target) (1) ->]
+  ignore line: [(Link target) -> ]
+  ignore line: [  LINK : warning LNK4044: unrecognized option '/Wl,--verbose']
+  ignore line: [ ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_5c1be.vcxproj]]
+  ignore line: []
+  ignore line: [    1 Warning(s)]
+  ignore line: [    0 Error(s)]
+  ignore line: []
+  ignore line: [Time Elapsed 00:00:00.53]
+  ignore line: []
+  linker did not report search dirs, re-using implicit dirs
+  implicit libs: []
+  implicit dirs: []
+  implicit linker search dirs: []
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_f9f91.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:47:01 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_f9f91.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_f9f91.dir\Debug\".
+  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_f9f91.dir\Debug\cmTC_f9f91.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_f9f91.dir\Debug\cmTC_f9f91.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_f9f91.dir\Debug\\" /Fd"cmTC_f9f91.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_f9f91.dir\Debug\\" /Fd"cmTC_f9f91.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  
+  testCXXCompiler.cxx
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_f9f91.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_f9f91.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_f9f91.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_f9f91.dir\Debug\testCXXCompiler.obj
+  cmTC_f9f91.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_f9f91.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_f9f91.dir\Debug\cmTC_f9f91.tlog\unsuccessfulbuild".
+  Touching "cmTC_f9f91.dir\Debug\cmTC_f9f91.tlog\cmTC_f9f91.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_f9f91.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.55
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_1af98.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:47:02 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_1af98.dir\Debug\".
+  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1af98.dir\Debug\\" /Fd"cmTC_1af98.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1af98.dir\Debug\\" /Fd"cmTC_1af98.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  
+  CMakeCXXCompilerABI.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_1af98.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_1af98.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_1af98.lib" /MACHINE:X86 /SAFESEH  /machine:X86 -Wl,--verbose cmTC_1af98.dir\Debug\CMakeCXXCompilerABI.obj
+LINK : warning LNK4044: unrecognized option '/Wl,--verbose'; ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj]
+  cmTC_1af98.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_1af98.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\unsuccessfulbuild".
+  Touching "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\cmTC_1af98.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" (default targets).
+
+Build succeeded.
+
+"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" (default target) (1) ->
+(Link target) -> 
+  LINK : warning LNK4044: unrecognized option '/Wl,--verbose'; ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj]
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.59
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(link\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_1af98.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"]
+  ignore line: [Microsoft (R) Build Engine version 14.0.25420.1]
+  ignore line: [Copyright (C) Microsoft Corporation. All rights reserved.]
+  ignore line: []
+  ignore line: [Build started 6/5/2017 1:47:02 PM.]
+  ignore line: [Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" on node 1 (default targets).]
+  ignore line: [PrepareForBuild:]
+  ignore line: [  Creating directory "cmTC_1af98.dir\Debug\".]
+  ignore line: [  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".]
+  ignore line: [  Creating directory "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\".]
+  ignore line: [InitializeBuildStatus:]
+  ignore line: [  Creating "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.]
+  ignore line: [ClCompile:]
+  ignore line: [  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1af98.dir\Debug\\" /Fd"cmTC_1af98.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"]
+  ignore line: [  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86]
+  ignore line: [  Copyright (C) Microsoft Corporation.  All rights reserved.]
+  ignore line: [  ]
+  ignore line: [  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1af98.dir\Debug\\" /Fd"cmTC_1af98.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\ProgramData\Anaconda3\envs\caffe-dev\Library\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"]
+  ignore line: [  ]
+  ignore line: [  CMakeCXXCompilerABI.cpp]
+  ignore line: [Link:]
+  ignore line: [  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_1af98.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_1af98.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_1af98.lib" /MACHINE:X86 /SAFESEH  /machine:X86 -Wl,--verbose cmTC_1af98.dir\Debug\CMakeCXXCompilerABI.obj]
+  ignore line: [LINK : warning LNK4044: unrecognized option '/Wl,--verbose']
+  ignore line: [ ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj]]
+  ignore line: [  cmTC_1af98.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_1af98.exe]
+  ignore line: [FinalizeBuildStatus:]
+  ignore line: [  Deleting file "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\unsuccessfulbuild".]
+  ignore line: [  Touching "cmTC_1af98.dir\Debug\cmTC_1af98.tlog\cmTC_1af98.lastbuildstate".]
+  ignore line: [Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" (default targets).]
+  ignore line: []
+  ignore line: [Build succeeded.]
+  ignore line: []
+  ignore line: ["C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj" (default target) (1) ->]
+  ignore line: [(Link target) -> ]
+  ignore line: [  LINK : warning LNK4044: unrecognized option '/Wl,--verbose']
+  ignore line: [ ignored [C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_1af98.vcxproj]]
+  ignore line: []
+  ignore line: [    1 Warning(s)]
+  ignore line: [    0 Error(s)]
+  ignore line: []
+  ignore line: [Time Elapsed 00:00:00.59]
+  ignore line: []
+  linker did not report search dirs, re-using implicit dirs
+  implicit libs: []
+  implicit dirs: []
+  implicit linker search dirs: []
+  implicit fwks: []
+
+
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8fba3.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/5/2017 1:47:03 PM.
+Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_8fba3.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_8fba3.dir\Debug\".
+  Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_8fba3.dir\Debug\cmTC_8fba3.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_8fba3.dir\Debug\cmTC_8fba3.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8fba3.dir\Debug\\" /Fd"cmTC_8fba3.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\feature_tests.cxx"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8fba3.dir\Debug\\" /Fd"cmTC_8fba3.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\feature_tests.cxx"
+  
+  feature_tests.cxx
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_8fba3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_8fba3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/CMakeTmp/Debug/cmTC_8fba3.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8fba3.dir\Debug\feature_tests.obj
+  cmTC_8fba3.vcxproj -> C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\Debug\cmTC_8fba3.exe
+FinalizeBuildStatus:
+  Deleting file "cmTC_8fba3.dir\Debug\cmTC_8fba3.tlog\unsuccessfulbuild".
+  Touching "cmTC_8fba3.dir\Debug\cmTC_8fba3.tlog\cmTC_8fba3.lastbuildstate".
+Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\CMakeFiles\CMakeTmp\cmTC_8fba3.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.54
+
+
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates

@@ -23,12 +23,10 @@ namespace caffe {
 template <typename Dtype>
 class Blob {
  public:
-  Blob()
-       : data_(), diff_(), count_(0), capacity_(0) {}
+  Blob() : data_(), diff_(), count_(0), capacity_(0) {}
 
   /// @brief Deprecated; use <code>Blob(const vector<int>& shape)</code>.
-  explicit Blob(const int num, const int channels, const int height,
-      const int width);
+  explicit Blob(const int num, const int channels, const int height, const int width);
   explicit Blob(const vector<int>& shape);
 
   /// @brief Deprecated; use <code>Reshape(const vector<int>& shape)</code>.
@@ -137,10 +135,10 @@ class Blob {
   /// @brief Deprecated legacy shape accessor width: use shape(3) instead.
   inline int width() const { return LegacyShape(3); }
   inline int LegacyShape(int index) const {
-    CHECK_LE(num_axes(), 4)
+    CHECK_LE(num_axes(), 8)
         << "Cannot use legacy accessors on Blobs with > 4 axes.";
-    CHECK_LT(index, 4);
-    CHECK_GE(index, -4);
+    CHECK_LT(index, 8);
+    CHECK_GE(index, -8);
     if (index >= num_axes() || index < -num_axes()) {
       // Axis is out of range, but still in [0, 3] (or [-4, -1] for reverse
       // indexing) -- this special case simulates the one-padding used to fill
@@ -265,6 +263,16 @@ class Blob {
   void ShareDiff(const Blob& other);
 
   bool ShapeEquals(const BlobProto& other);
+
+  void ReleaseMemory(){
+    if(data_ != NULL) data_->release_memory();
+    if(diff_ != NULL) diff_->release_memory();
+  }
+
+  void useBlob(void* ref);
+  void doneUsing(void* ref);
+  void prevent_mem_release();
+  void allow_mem_release();
 
  protected:
   shared_ptr<SyncedMemory> data_;

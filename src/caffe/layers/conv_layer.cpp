@@ -1,7 +1,6 @@
 #include <vector>
-
+#include "caffe/syncedmem.hpp"
 #include "caffe/layers/conv_layer.hpp"
-
 namespace caffe {
 
 template <typename Dtype>

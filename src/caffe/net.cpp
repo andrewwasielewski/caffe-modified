@@ -4,8 +4,10 @@
 #include <string>
 #include <utility>
 #include <vector>
-
-#include <iostream>
+// #include <ctime>
+// #include <ratio>
+// #include <chrono>
+// #include <iostream>
 
 #include "hdf5.h"
 
@@ -18,6 +20,8 @@
 #include "caffe/util/insert_splits.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/util/upgrade_proto.hpp"
+#include <cuda_profiler_api.h>
+
 
 namespace caffe {
 
@@ -44,6 +48,9 @@ Net<Dtype>::Net(const string& param_file, Phase phase,
 
 template <typename Dtype>
 void Net<Dtype>::Init(const NetParameter& in_param) {
+
+  // timedata.open("timing.txt", std::ofstream::out | std::ofstream::app);
+  iteration_number = 0;
   // Set phase from the state.
   phase_ = in_param.state().phase();
   // Filter layers based on their include/exclude rules and
@@ -121,6 +128,7 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
     }
     // After this layer is connected, set it up.
     layers_[layer_id]->SetUp(bottom_vecs_[layer_id], top_vecs_[layer_id]);
+    layers_[layer_id]->AllowIntermediateBlobRemoval(bottom_vecs_[layer_id], top_vecs_[layer_id]);
     LOG_IF(INFO, Caffe::root_solver())
         << "Setting up " << layer_names_[layer_id];
     for (int top_id = 0; top_id < top_vecs_[layer_id].size(); ++top_id) {
@@ -128,16 +136,16 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
         blob_loss_weights_.resize(top_id_vecs_[layer_id][top_id] + 1, Dtype(0));
       }
       blob_loss_weights_[top_id_vecs_[layer_id][top_id]] = layer->loss(top_id);
-      LOG_IF(INFO, Caffe::root_solver())
-          << "Top shape: " << top_vecs_[layer_id][top_id]->shape_string();
+      // LOG_IF(INFO, Caffe::root_solver())
+      //     << "Top shape: " << top_vecs_[layer_id][top_id]->shape_string();
       if (layer->loss(top_id)) {
         LOG_IF(INFO, Caffe::root_solver())
             << "    with loss weight " << layer->loss(top_id);
       }
       memory_used_ += top_vecs_[layer_id][top_id]->count();
     }
-    LOG_IF(INFO, Caffe::root_solver())
-        << "Memory required for data: " << memory_used_ * sizeof(Dtype);
+    // LOG_IF(INFO, Caffe::root_solver())
+    //     << "Memory required for data: " << memory_used_ * sizeof(Dtype);
     const int param_size = layer_param.param_size();
     const int num_param_blobs = layers_[layer_id]->blobs().size();
     CHECK_LE(param_size, num_param_blobs)
@@ -197,10 +205,10 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
     if (!layer_contributes_loss) { layer_need_backward_[layer_id] = false; }
     if (Caffe::root_solver()) {
       if (layer_need_backward_[layer_id]) {
-        LOG(INFO) << layer_names_[layer_id] << " needs backward computation.";
+        // LOG(INFO) << layer_names_[layer_id] << " needs backward computation.";
       } else {
-        LOG(INFO) << layer_names_[layer_id]
-            << " does not need backward computation.";
+        // LOG(INFO) << layer_names_[layer_id]
+        //     << " does not need backward computation.";
       }
     }
     for (int bottom_id = 0; bottom_id < bottom_vecs_[layer_id].size();
@@ -254,6 +262,22 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
   }
   ShareWeights();
   debug_info_ = param.debug_info();
+
+
+  //prevent input and output blobs from being removed
+  for(size_t blob_id = 0; blob_id < net_input_blobs_.size(); ++blob_id) {
+    net_input_blobs_[blob_id]->prevent_mem_release();
+  }
+  for(size_t blob_id = 0; blob_id < net_output_blobs_.size(); ++blob_id) {
+     net_output_blobs_[blob_id]->prevent_mem_release();
+  }
+
+  //timing data
+  // for(int i = 0; i < param.layer_size(); ++i) {
+  //   avg_time_fwd.push_back(std::vector<double>());
+  //   avg_time_back.push_back(std::vector<double>());
+  // }
+
   LOG_IF(INFO, Caffe::root_solver()) << "Network initialization done.";
 }
 
@@ -517,19 +541,53 @@ void Net<Dtype>::AppendParam(const NetParameter& param, const int layer_id,
 template <typename Dtype>
 Dtype Net<Dtype>::ForwardFromTo(int start, int end) {
   CHECK_GE(start, 0);
-  CHECK_LT(end, layers_.size());
+  CHECK_LT(end, layers_.size());  
+
+  // using namespace std::chrono;
+
   Dtype loss = 0;
   for (int i = start; i <= end; ++i) {
     for (int c = 0; c < before_forward_.size(); ++c) {
       before_forward_[c]->run(i);
     }
+    // high_resolution_clock::time_point layer_start_time = high_resolution_clock::now();
+    
     Dtype layer_loss = layers_[i]->Forward(bottom_vecs_[i], top_vecs_[i]);
+    
+    // high_resolution_clock::time_point end_time = high_resolution_clock::now();
+    // duration<double> time_span = duration_cast<duration<double>>(end_time - layer_start_time);
+    // avg_time_fwd[i].push_back(time_span.count());
+    // timedata << time_span.count() << ", ";
+
+
     loss += layer_loss;
     if (debug_info_) { ForwardDebugInfo(i); }
     for (int c = 0; c < after_forward_.size(); ++c) {
       after_forward_[c]->run(i);
-    }
-  }
+    }  
+  }   
+
+  // if(iteration_number == 10) {
+
+  //   timedata << "FINAL output" << std::endl;
+
+  //   double ttl_time = 0.0;
+  //   for(int i = 0; i <= end; ++i) {
+  //     double layer_time = 0.0;
+  //     for(int j = 0; j < avg_time_fwd[i].size(); ++j) {
+  //       layer_time += avg_time_fwd[i][j];
+  //     }
+  //     layer_time /= avg_time_fwd[i].size();
+  //     timedata << layer_names_[i] << " " << i << " avg: " << layer_time << std::endl;
+  //     ttl_time += layer_time;
+  //   }
+  //   timedata << "\navg forward pass in:\n" << ttl_time << " (seconds)" << std::endl;
+  // }
+
+   // for (int i = 0; i < blobs_.size(); ++i) {
+   //    if(blobs_[i]->data()->get_cpu_ptr() != NULL) std::cout << "blob " << i << " not released" << std::endl;
+   // }
+
   return loss;
 }
 
@@ -562,6 +620,8 @@ const vector<Blob<Dtype>*>& Net<Dtype>::Forward(
   for (int i = 0; i < bottom.size(); ++i) {
     net_input_blobs_[i]->CopyFrom(*bottom[i]);
   }
+
+  
   return Forward(loss);
 }
 
@@ -569,19 +629,50 @@ template <typename Dtype>
 void Net<Dtype>::BackwardFromTo(int start, int end) {
   CHECK_GE(end, 0);
   CHECK_LT(start, layers_.size());
+  // cudaProfilerStart();
+  // using namespace std::chrono;
   for (int i = start; i >= end; --i) {
     for (int c = 0; c < before_backward_.size(); ++c) {
       before_backward_[c]->run(i);
     }
     if (layer_need_backward_[i]) {
-      layers_[i]->Backward(
-          top_vecs_[i], bottom_need_backward_[i], bottom_vecs_[i]);
+      // high_resolution_clock::time_point layer_start_time = high_resolution_clock::now();
+
+      layers_[i]->Backward(top_vecs_[i], bottom_need_backward_[i], bottom_vecs_[i]);
+
+      // high_resolution_clock::time_point end_time = high_resolution_clock::now();
+      // duration<double> time_span = duration_cast<duration<double>>(end_time - layer_start_time);
+      // avg_time_back[i].push_back(time_span.count());
+
       if (debug_info_) { BackwardDebugInfo(i); }
     }
     for (int c = 0; c < after_backward_.size(); ++c) {
       after_backward_[c]->run(i);
     }
   }
+  // std::cout << "backward from to " << start << " " << end << std::endl;
+  // iteration_number++;
+  // if(iteration_number == 32) {
+  //   std::cout << "done!!!" << std::endl;
+  //   cudaProfilerStop();
+  // }
+
+  //   timedata << "FINAL back output" << std::endl;
+
+  //   double ttl_time = 0.0;
+  //   for(int i = 0; i <= start; ++i) {
+  //     double layer_time = 0.0;
+  //     for(int j = 0; j < avg_time_back[i].size(); ++j) {
+  //       layer_time += avg_time_back[i][j];
+  //     }
+  //     if(layer_time != 0) layer_time /= avg_time_back[i].size();
+  //     timedata << layer_names_[i] << " " << i << " avg: " << layer_time << std::endl;
+  //     ttl_time += layer_time;
+  //   }
+  //   timedata << "\navg backwards pass in:\n" << ttl_time << " (seconds)" << std::endl;
+    
+  // }
+
 }
 
 template <typename Dtype>

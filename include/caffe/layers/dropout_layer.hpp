@@ -40,6 +40,11 @@ class DropoutLayer : public NeuronLayer<Dtype> {
 
   virtual inline const char* type() const { return "Dropout"; }
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    rand_vec_.ReleaseMemory();
+  }
+
  protected:
   /**
    * @param bottom input Blob vector (length 1)

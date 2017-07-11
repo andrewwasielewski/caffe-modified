@@ -33,6 +33,33 @@ class LRNLayer : public Layer<Dtype> {
   virtual inline int ExactNumBottomBlobs() const { return 1; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    scale_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = split_top_vec_.begin(); it != split_top_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+    square_input_.ReleaseMemory();
+    square_output_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = square_bottom_vec_.begin(); it != square_bottom_vec_.end(); ++it) {
+      // (*it)->ReleaseMemory();
+    // }
+    // for(std::vector<Blob<Dtype>*>::iterator it = square_top_vec_.begin(); it != square_top_vec_.end(); ++it) {
+      // (*it)->ReleaseMemory();
+    // }
+    pool_output_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = pool_top_vec_.begin(); it != pool_top_vec_.end(); ++it) {
+      // (*it)->ReleaseMemory();
+    // }
+    power_output_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = power_top_vec_.begin(); it != power_top_vec_.end(); ++it) {
+      // (*it)->ReleaseMemory();
+    // }
+    product_input_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = product_bottom_vec_.begin(); it != product_bottom_vec_.end(); ++it) {
+      // (*it)->ReleaseMemory();
+    // }
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

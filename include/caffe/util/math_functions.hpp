@@ -220,6 +220,12 @@ void caffe_gpu_powx(const int n, const Dtype* a, const Dtype b, Dtype* y);
 template <typename Dtype>
 void caffe_gpu_sqrt(const int n, const Dtype* a, Dtype* y);
 
+template <typename Dtype>
+void caffe_gpu_get_col(const int n, const Dtype *idata, Dtype *odata, int len_row, int num_rows, int len_col, int col_number);
+
+template <typename Dtype>
+void caffe_gpu_add_col(const int n, Dtype *matrix, Dtype *add_col, int len_row, int num_rows, int len_col, int col_number);
+
 // caffe_gpu_rng_uniform with two arguments generates integers in the range
 // [0, UINT_MAX].
 void caffe_gpu_rng_uniform(const int n, unsigned int* r);

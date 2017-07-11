@@ -7,7 +7,7 @@
 #include "caffe/util/math_functions.hpp"
 
 namespace caffe {
-
+  
 template <typename Dtype>
 void Blob<Dtype>::Reshape(const int num, const int channels, const int height,
     const int width) {
@@ -155,13 +155,19 @@ Dtype* Blob<Dtype>::mutable_gpu_diff() {
 template <typename Dtype>
 void Blob<Dtype>::ShareData(const Blob& other) {
   CHECK_EQ(count_, other.count());
-  data_ = other.data();
+  if(other.data() != data_) {
+    other.data()->append_refs(data_->get_references());
+    data_ = other.data();
+  }
 }
 
 template <typename Dtype>
 void Blob<Dtype>::ShareDiff(const Blob& other) {
   CHECK_EQ(count_, other.count());
-  diff_ = other.diff();
+  if(other.diff() != diff_) {
+    other.diff()->append_refs(diff_->get_references());
+    diff_ = other.diff();
+  }
 }
 
 // The "update" method is used for parameter blobs in a Net, which are stored
@@ -551,6 +557,43 @@ void Blob<float>::ToProto(BlobProto* proto, bool write_diff) const {
       proto->add_diff(diff_vec[i]);
     }
   }
+}
+
+template <typename Dtype>
+void Blob<Dtype>::useBlob(void* ref) {
+  if(data_ != NULL) data_->add_mem_ref(ref);
+  else LOG(FATAL) << "unable to add layer memory reference";
+  if(diff_ != NULL) diff_->add_mem_ref(ref);
+  else LOG(FATAL) << "unable to add layer memory reference";
+  if(shape_data_ != NULL) shape_data_->add_mem_ref(ref);
+  else LOG(FATAL) << "unable to add layer memory reference";
+}
+
+template <typename Dtype>
+void Blob<Dtype>::doneUsing(void* ref) {
+  if(data_ != NULL) data_->remove_mem_ref(ref);
+  else LOG(FATAL) << "unable to remove layer memory reference";
+  if(diff_ != NULL) diff_->remove_mem_ref(ref);
+  else LOG(FATAL) << "unable to remove layer memory reference";
+  if(shape_data_ != NULL) shape_data_->remove_mem_ref(ref);
+  else LOG(FATAL) << "unable to remove layer memory reference";
+}
+
+template <typename Dtype>
+void Blob<Dtype>::prevent_mem_release() {
+  if(data_ != NULL) data_->set_persistent();
+  else LOG(FATAL) << "unable make blob persistent";
+  if(diff_ != NULL) diff_->set_persistent();
+  else LOG(FATAL) << "unable make blob persistent";
+  if(shape_data_ != NULL) shape_data_->set_persistent();
+  else LOG(FATAL) << "unable make blob persistent";
+}
+
+template <typename Dtype>
+void Blob<Dtype>::allow_mem_release() {
+  if(data_ != NULL) data_->disable_persistent();
+  if(diff_ != NULL) diff_->disable_persistent();
+  if(shape_data_ != NULL) shape_data_->disable_persistent();
 }
 
 INSTANTIATE_CLASS(Blob);

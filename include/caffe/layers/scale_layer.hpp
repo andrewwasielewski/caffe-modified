@@ -38,6 +38,15 @@ class ScaleLayer: public Layer<Dtype> {
   virtual inline int MaxBottomBlobs() const { return 2; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    // for(std::vector<Blob<Dtype>*>::iterator it = bias_bottom_vec_.begin(); it != bias_bottom_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+    sum_multiplier_.ReleaseMemory();
+    sum_result_.ReleaseMemory();
+    temp_.ReleaseMemory();
+  }
+
  protected:
   /**
    * In the below shape specifications, @f$ i @f$ denotes the value of the

@@ -41,6 +41,11 @@ class AccuracyLayer : public Layer<Dtype> {
   virtual inline int MinTopBlobs() const { return 1; }
   virtual inline int MaxTopBlobs() const { return 2; }
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    nums_buffer_.ReleaseMemory();
+  }
+
  protected:
   /**
    * @param bottom input Blob vector (length 2)

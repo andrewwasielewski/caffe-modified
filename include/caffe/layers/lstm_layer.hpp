@@ -82,6 +82,10 @@ class LSTMUnitLayer : public Layer<Dtype> {
     return bottom_index != 2;
   }
 
+  virtual void ReleaseAllBuffers() {
+    X_acts_.ReleaseMemory();
+  }
+
  protected:
   /**
    * @param bottom input Blob vector (length 3)

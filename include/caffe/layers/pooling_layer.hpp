@@ -34,6 +34,11 @@ class PoolingLayer : public Layer<Dtype> {
             PoolingParameter_PoolMethod_MAX) ? 2 : 1;
   }
 
+  virtual void ReleaseAllBuffers() {
+    rand_idx_.ReleaseMemory();
+    max_idx_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

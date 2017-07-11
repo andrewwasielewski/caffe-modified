@@ -55,6 +55,15 @@ class SigmoidCrossEntropyLossLayer : public LossLayer<Dtype> {
 
   virtual inline const char* type() const { return "SigmoidCrossEntropyLoss"; }
 
+  virtual void ReleaseAllBuffers() {
+    // for(std::vector<Blob<Dtype>*>::iterator it = sigmoid_bottom_vec_.begin(); it != sigmoid_bottom_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+    // for(std::vector<Blob<Dtype>*>::iterator it = sigmoid_top_vec_.begin(); it != sigmoid_top_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+  }
+
  protected:
   /// @copydoc SigmoidCrossEntropyLossLayer
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,

@@ -408,6 +408,67 @@ void caffe_gpu_sqrt<double>(const int N, const double* a, double* y) {
       N, a, y);
 }
 
+template <typename Dtype>
+__global__ void getColNaive(const int n, const Dtype *idata, Dtype *odata, int len_row, int num_rows, int len_col, int col_number)
+{
+  CUDA_KERNEL_LOOP(index, num_rows) {
+    for (int k = 0; k < len_col; k++) {
+      odata[index * len_col + k] = idata[index * len_row + (k + col_number * len_col)];
+    } 
+  }
+}
+
+template <typename Dtype>
+__global__ void getColCoalesced(const int n, const Dtype *idata, Dtype *odata, int len_row, int num_rows, int len_col, int col_number)
+{
+
+  int x = blockIdx.x * blockDim.x + threadIdx.x;
+  if(x < num_rows * len_col) odata[x] = idata[x / len_col * len_row + (x % len_col + col_number * len_col)];  
+}
+
+template <>
+void caffe_gpu_get_col<float>(const int N, const float *idata, float *odata, int len_row, int num_rows, int len_col, int col_number) {
+  // NOLINT_NEXT_LINE(whitespace/operators)
+  getColCoalesced<float><<<CAFFE_GET_BLOCKS(N), CAFFE_CUDA_NUM_THREADS>>>(N, idata, odata, len_row, num_rows, len_col, col_number);
+}
+
+template <>
+void caffe_gpu_get_col<double>(const int N, const double *idata, double *odata, int len_row, int num_rows, int len_col, int col_number) {
+  // NOLINT_NEXT_LINE(whitespace/operators)
+  getColCoalesced<double><<<CAFFE_GET_BLOCKS(N), CAFFE_CUDA_NUM_THREADS>>>(N, idata, odata, len_row, num_rows, len_col, col_number);
+}
+
+template <typename Dtype>
+__global__ void addColNaive(const int n, Dtype *matrix, Dtype *add_col, int len_row, int num_rows, int len_col, int col_number)
+{
+  CUDA_KERNEL_LOOP(index, num_rows) {
+    for (int k = 0; k < len_col; k++) {
+      matrix[index * len_row + (k + col_number * len_col)] += add_col[index * len_col + k];
+    } 
+  }
+}
+
+template <typename Dtype>
+__global__ void addColCoalesced(const int n, Dtype *matrix, Dtype *add_col, int len_row, int num_rows, int len_col, int col_number)
+{
+  int x = blockIdx.x * blockDim.x + threadIdx.x;
+  if(x < num_rows * len_col) {
+      matrix[x / len_col * len_row + (x % len_col + col_number * len_col)] += add_col[x];
+  }
+}
+
+template <>
+void caffe_gpu_add_col<float>(const int N, float *matrix, float *add_col, int len_row, int num_rows, int len_col, int col_number) {
+  // NOLINT_NEXT_LINE(whitespace/operators)
+  addColCoalesced<float><<<CAFFE_GET_BLOCKS(N), CAFFE_CUDA_NUM_THREADS>>>(N, matrix, add_col, len_row, num_rows, len_col, col_number);
+}
+
+template <>
+void caffe_gpu_add_col<double>(const int N, double *matrix, double *add_col, int len_row, int num_rows, int len_col, int col_number) {
+  // NOLINT_NEXT_LINE(whitespace/operators)
+  addColCoalesced<double><<<CAFFE_GET_BLOCKS(N), CAFFE_CUDA_NUM_THREADS>>>(N, matrix, add_col, len_row, num_rows, len_col, col_number);
+}
+
 DEFINE_AND_INSTANTIATE_GPU_UNARY_FUNC(sign, y[index] = (Dtype(0) < x[index])
                                       - (x[index] < Dtype(0)));
 DEFINE_AND_INSTANTIATE_GPU_UNARY_FUNC(sgnbit, y[index] = signbit(x[index]));

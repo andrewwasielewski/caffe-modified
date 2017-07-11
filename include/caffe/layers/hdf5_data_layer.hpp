@@ -35,6 +35,12 @@ class HDF5DataLayer : public Layer<Dtype> {
   virtual inline int ExactNumBottomBlobs() const { return 0; }
   virtual inline int MinTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    //for(std::vector<shared_ptr<Blob<Dtype>>>::iterator it = hdf_blobs_.begin(); it != hdf_blobs_.end(); ++it) {
+      //(*it)->ReleaseMemory();
+    //}
+  }
+
  protected:
   void Next();
   bool Skip();

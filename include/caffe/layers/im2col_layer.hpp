@@ -30,6 +30,13 @@ class Im2colLayer : public Layer<Dtype> {
   virtual inline int ExactNumBottomBlobs() const { return 1; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
 
+  virtual void ReleaseAllBuffers() {
+    kernel_shape_.ReleaseMemory();
+    stride_.ReleaseMemory();
+    pad_.ReleaseMemory();
+    dilation_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

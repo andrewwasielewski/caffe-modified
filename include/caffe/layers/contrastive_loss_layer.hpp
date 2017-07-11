@@ -53,6 +53,14 @@ class ContrastiveLossLayer : public LossLayer<Dtype> {
     return bottom_index != 2;
   }
 
+  //TODO - it might not be efficient to release all the smaller buffers
+  virtual void ReleaseAllBuffers() {
+    diff_.ReleaseMemory();
+    dist_sq_.ReleaseMemory();
+    diff_sq_.ReleaseMemory();
+    summer_vec_.ReleaseMemory();
+  }
+
  protected:
   /// @copydoc ContrastiveLossLayer
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,

@@ -2,6 +2,7 @@
 #define CAFFE_SYNCEDMEM_HPP_
 
 #include <cstdlib>
+#include <list>
 
 #ifdef USE_MKL
   #include "mkl.h"
@@ -47,7 +48,6 @@ inline void CaffeFreeHost(void* ptr, bool use_cuda) {
 #endif
 }
 
-
 /**
  * @brief Manages memory allocation and synchronization between the host (CPU)
  *        and device (GPU).
@@ -65,9 +65,21 @@ class SyncedMemory {
   void set_gpu_data(void* data);
   void* mutable_cpu_data();
   void* mutable_gpu_data();
+  void release_memory();
+
   enum SyncedHead { UNINITIALIZED, HEAD_AT_CPU, HEAD_AT_GPU, SYNCED };
   SyncedHead head() { return head_; }
   size_t size() { return size_; }
+
+  void add_mem_ref(void* layer);
+  void remove_mem_ref(void* layer);
+  void set_persistent() { persistent_ = true; }
+  void disable_persistent() { persistent_ = false; }
+  std::list<void*> get_references() { return references; }
+  void append_refs(std::list<void*> additionalLayers);
+
+  static int num_mem;
+  int get_id() { return id_; }
 
 #ifndef CPU_ONLY
   void async_gpu_push(const cudaStream_t& stream);
@@ -86,6 +98,12 @@ class SyncedMemory {
   bool cpu_malloc_use_cuda_;
   bool own_gpu_data_;
   int device_;
+  int id_;
+  bool persistent_;
+
+  std::list<void*> references;
+  std::list<void*> current_references;
+
 
   DISABLE_COPY_AND_ASSIGN(SyncedMemory);
 };  // class SyncedMemory

@@ -54,6 +54,10 @@ class EuclideanLossLayer : public LossLayer<Dtype> {
     return true;
   }
 
+  virtual void ReleaseAllBuffers() {
+    diff_.ReleaseMemory();
+  }
+
  protected:
   /// @copydoc EuclideanLossLayer
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,

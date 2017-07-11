@@ -69,6 +69,18 @@ class InfogainLossLayer : public LossLayer<Dtype> {
 
   virtual inline const char* type() const { return "InfogainLoss"; }
 
+  virtual void ReleaseAllBuffers() {
+    prob_.ReleaseMemory();
+    infogain_.ReleaseMemory();
+    sum_rows_H_.ReleaseMemory();
+    // for(std::vector<Blob<Dtype>*>::iterator it = softmax_bottom_vec_.begin(); it != softmax_bottom_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+    // for(std::vector<Blob<Dtype>*>::iterator it = softmax_top_vec_.begin(); it != softmax_top_vec_.end(); ++it) {
+    //   (*it)->ReleaseMemory();
+    // }
+  }
+
  protected:
   /// @copydoc InfogainLossLayer
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,

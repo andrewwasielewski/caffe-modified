@@ -1,11 +1,16 @@
 #include "caffe/common.hpp"
 #include "caffe/syncedmem.hpp"
 #include "caffe/util/math_functions.hpp"
+#include <algorithm>
+
 
 namespace caffe {
+int SyncedMemory::num_mem(0);
+
 SyncedMemory::SyncedMemory()
   : cpu_ptr_(NULL), gpu_ptr_(NULL), size_(0), head_(UNINITIALIZED),
-    own_cpu_data_(false), cpu_malloc_use_cuda_(false), own_gpu_data_(false) {
+    own_cpu_data_(false), cpu_malloc_use_cuda_(false), own_gpu_data_(false), id_(num_mem++), persistent_(true) {
+  
 #ifndef CPU_ONLY
 #ifdef DEBUG
   CUDA_CHECK(cudaGetDevice(&device_));
@@ -15,7 +20,7 @@ SyncedMemory::SyncedMemory()
 
 SyncedMemory::SyncedMemory(size_t size)
   : cpu_ptr_(NULL), gpu_ptr_(NULL), size_(size), head_(UNINITIALIZED),
-    own_cpu_data_(false), cpu_malloc_use_cuda_(false), own_gpu_data_(false) {
+    own_cpu_data_(false), cpu_malloc_use_cuda_(false), own_gpu_data_(false), id_(num_mem++), persistent_(true) {
 #ifndef CPU_ONLY
 #ifdef DEBUG
   CUDA_CHECK(cudaGetDevice(&device_));
@@ -23,12 +28,13 @@ SyncedMemory::SyncedMemory(size_t size)
 #endif
 }
 
+
 SyncedMemory::~SyncedMemory() {
   check_device();
   if (cpu_ptr_ && own_cpu_data_) {
     CaffeFreeHost(cpu_ptr_, cpu_malloc_use_cuda_);
+    own_cpu_data_ = false;
   }
-
 #ifndef CPU_ONLY
   if (gpu_ptr_ && own_gpu_data_) {
     CUDA_CHECK(cudaFree(gpu_ptr_));
@@ -167,6 +173,47 @@ void SyncedMemory::async_gpu_push(const cudaStream_t& stream) {
 }
 #endif
 
+void SyncedMemory::add_mem_ref(void* layer) {
+  references.push_back(layer);
+  current_references.push_back(layer);
+}
+
+void SyncedMemory::remove_mem_ref(void* layer) {
+  current_references.remove(layer);
+  if(current_references.size() == 0  && !persistent_) {
+    release_memory();
+    current_references = references;//performs a deep copy - restore the list of current references after cleanup (to allow for an additional pass)
+  }
+ }
+
+void SyncedMemory::append_refs(std::list<void*> additionalLayers) {
+  for(std::list<void*>::iterator it = additionalLayers.begin(); it != additionalLayers.end(); ++it) {
+	  if (std::find(current_references.begin(), current_references.end(), *it) == current_references.end()) {
+		  current_references.push_back(*it);
+	  }
+	  if (std::find(references.begin(), references.end(), *it) == references.end()) {
+		  references.push_back(*it);
+	  }
+  }
+}
+
+void SyncedMemory::release_memory() {
+  check_device();
+  if (cpu_ptr_ && own_cpu_data_) {
+    CaffeFreeHost(cpu_ptr_, cpu_malloc_use_cuda_);
+    own_cpu_data_ = false;
+    cpu_ptr_ = NULL;
+  }
+#ifndef CPU_ONLY
+  if (gpu_ptr_ && own_gpu_data_) {
+    CUDA_CHECK(cudaFree(gpu_ptr_));
+    own_gpu_data_ = false;
+    gpu_ptr_ = NULL;
+  }
+#endif  // CPU_ONLY
+  head_ = UNINITIALIZED;
+}
+
 void SyncedMemory::check_device() {
 #ifndef CPU_ONLY
 #ifdef DEBUG
@@ -178,6 +225,8 @@ void SyncedMemory::check_device() {
     CUDA_CHECK(cudaPointerGetAttributes(&attributes, gpu_ptr_));
     CHECK(attributes.device == device_);
   }
+
+
 #endif
 #endif
 }

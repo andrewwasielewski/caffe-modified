@@ -4,10 +4,11 @@
 :: Default values
 if DEFINED APPVEYOR (
     echo Setting Appveyor defaults
-    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=14
+    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=12
     if NOT DEFINED WITH_NINJA set WITH_NINJA=1
-    if NOT DEFINED CPU_ONLY set CPU_ONLY=1
-    if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Auto
+    if NOT DEFINED WITH_CUDA set WITH_CUDA=1
+    if NOT DEFINED CPU_ONLY set CPU_ONLY=0
+    if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Maxwell
     if NOT DEFINED CMAKE_CONFIG set CMAKE_CONFIG=Release
     if NOT DEFINED USE_NCCL set USE_NCCL=0
     if NOT DEFINED CMAKE_BUILD_SHARED_LIBS set CMAKE_BUILD_SHARED_LIBS=0
@@ -22,7 +23,7 @@ if DEFINED APPVEYOR (
 
     :: Set python 2.7 with conda as the default python
     if !PYTHON_VERSION! EQU 2 (
-        set CONDA_ROOT=C:\Miniconda-x64
+        set CONDA_ROOT=C:\ProgramData\Anaconda2
     )
     :: Set python 3.5 with conda as the default python
     if !PYTHON_VERSION! EQU 3 (
@@ -69,15 +70,16 @@ if DEFINED APPVEYOR (
 ) else (
     :: Change the settings here to match your setup
     :: Change MSVC_VERSION to 12 to use VS 2013
-    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=14
+    if NOT DEFINED MSVC_VERSION set MSVC_VERSION=12
     :: Change to 1 to use Ninja generator (builds much faster)
     if NOT DEFINED WITH_NINJA set WITH_NINJA=1
     :: Change to 1 to build caffe without CUDA support
-    if NOT DEFINED CPU_ONLY set CPU_ONLY=1
+    if NOT DEFINED CPU_ONLY set CPU_ONLY=0
     :: Change to generate CUDA code for one of the following GPU architectures
     :: [Fermi  Kepler  Maxwell  Pascal  All]
-    if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Auto
-    :: Change to Debug to build Debug. This is only relevant for the Ninja generator the Visual Studio generator will generate both Debug and Release configs
+    if NOT DEFINED CUDA_ARCH_NAME set CUDA_ARCH_NAME=Maxwell
+    if NOT DEFINED WITH_CUDA set WITH_CUDA=1
+    :: Change to Debug to build Debug. This is only relevant for the Ninja generator the Visual Studio generator will generate both Debug and Debug configs
     if NOT DEFINED CMAKE_CONFIG set CMAKE_CONFIG=Release
     :: Set to 1 to use NCCL
     if NOT DEFINED USE_NCCL set USE_NCCL=0
@@ -168,8 +170,8 @@ cmake -G"!CMAKE_GENERATOR!" ^
       -DCOPY_PREREQUISITES:BOOL=0 ^
       -DINSTALL_PREREQUISITES:BOOL=1 ^
       -DUSE_NCCL:BOOL=!USE_NCCL! ^
-      -DCMAKE_C_COMPILER=cl.exe ^
-      -DCMAKE_CXX_COMPILER=cl.exe ^
+      -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/amd64/cl.exe" ^
+      -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/amd64/cl.exe" ^
       -DCUDA_ARCH_NAME:STRING=%CUDA_ARCH_NAME% ^
       "%~dp0\.."
 

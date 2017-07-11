@@ -70,6 +70,12 @@ class Layer {
     LayerSetUp(bottom, top);
     Reshape(bottom, top);
     SetLossWeights(top);
+    for(int i = 0; i < bottom.size(); ++i) {
+      bottom[i]->useBlob((void*)this);
+    }
+    for(int i = 0; i < top.size(); ++i) {
+      top[i]->useBlob((void*)this);
+    }
   }
 
   /**
@@ -151,12 +157,34 @@ class Layer {
       const vector<bool>& propagate_down,
       const vector<Blob<Dtype>*>& bottom);
 
+
+  void AllowIntermediateBlobRemoval(const vector<Blob<Dtype>*>& bottom,
+                                    const vector<Blob<Dtype>*>& top) {
+    for(int i = 0; i < bottom.size(); ++i) {
+      bottom[i]->allow_mem_release();
+    }
+    for(int i = 0; i < top.size(); ++i) {
+      top[i]->allow_mem_release();
+    }
+  }
+
+  /**
+   * @brief Release memory temporary allocated during gemm calcuations.
+   */
+  virtual void ReleaseTemporaryBuffers() {}
+
+  /**
+   * @brief Release memory allocated by layer.
+   */
+  virtual void ReleaseAllLayerBuffers() {}
+
   /**
    * @brief Returns the vector of learnable parameter blobs.
    */
   vector<shared_ptr<Blob<Dtype> > >& blobs() {
     return blobs_;
   }
+  
 
   /**
    * @brief Returns the layer parameter.
@@ -290,7 +318,6 @@ class Layer {
     }
     param_propagate_down_[param_id] = value;
   }
-
 
  protected:
   /** The protobuf that stores the layer parameters */
@@ -441,6 +468,15 @@ inline Dtype Layer<Dtype>::Forward(const vector<Blob<Dtype>*>& bottom,
     break;
   default:
     LOG(FATAL) << "Unknown caffe mode.";
+  }       
+  ReleaseTemporaryBuffers();
+  if(phase_ == TEST) {
+    for(int i = 0; i < bottom.size(); ++i) {
+      bottom[i]->doneUsing((void*)this);
+    }
+    for(int i = 0; i < top.size(); ++i) {
+      top[i]->doneUsing((void*)this);
+    }    
   }
   return loss;
 }
@@ -459,6 +495,7 @@ inline void Layer<Dtype>::Backward(const vector<Blob<Dtype>*>& top,
   default:
     LOG(FATAL) << "Unknown caffe mode.";
   }
+  ReleaseTemporaryBuffers();    
 }
 
 // Serialize LayerParameter to protocol buffer

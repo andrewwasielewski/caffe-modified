@@ -44,6 +44,11 @@ class MemoryDataLayer : public BaseDataLayer<Dtype> {
   int height() { return height_; }
   int width() { return width_; }
 
+  virtual void ReleaseAllBuffers() {
+    added_data_.ReleaseMemory();
+    added_label_.ReleaseMemory();
+  }
+
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);

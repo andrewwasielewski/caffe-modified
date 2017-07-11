@@ -1,0 +1,18 @@
+﻿Build started 6/5/2017 1:49:05 PM.
+     1>Project "C:\Users\z003ncra\caffe-dev\src\demo\ZERO_CHECK.vcxproj" on node 2 (Build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\Users\z003ncra\caffe-dev\src\demo\Debug\".
+         Creating directory "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\".
+       InitializeBuildStatus:
+         Creating "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       CustomBuild:
+         Checking Build System
+         CMake does not need to re-run because C:/Users/z003ncra/caffe-dev/src/demo/CMakeFiles/generate.stamp is up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+         Touching "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+     1>Done Building Project "C:\Users\z003ncra\caffe-dev\src\demo\ZERO_CHECK.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.22

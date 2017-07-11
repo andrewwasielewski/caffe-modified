@@ -41,6 +41,12 @@ class PReLULayer : public NeuronLayer<Dtype> {
 
   virtual inline const char* type() const { return "PReLU"; }
 
+  virtual void ReleaseAllBuffers() {
+    multiplier_.ReleaseMemory();
+    backward_buff_.ReleaseMemory();
+    bottom_memory_.ReleaseMemory();
+  }
+
  protected:
   /**
    * @param bottom input Blob vector (length 1)
